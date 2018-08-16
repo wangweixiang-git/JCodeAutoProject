@@ -256,13 +256,12 @@ private static void setBeanProperty(ResultSetMetaData metadata, int len, List<Pr
         }else if(sqlType.equalsIgnoreCase("varchar") || sqlType.equalsIgnoreCase("char")     
                  || sqlType.equalsIgnoreCase("text") || sqlType.equalsIgnoreCase("tinytext")){    
             return PropertyType.String;    
-        }else if(sqlType.equalsIgnoreCase("datetime") ||sqlType.equalsIgnoreCase("date")){    
+        }else if(sqlType.equalsIgnoreCase("datetime") ||sqlType.equalsIgnoreCase("date") 
+        		 ||sqlType.equalsIgnoreCase("timestamp")||sqlType.equalsIgnoreCase("time")){    
             return PropertyType.Date;    
-        }else if(sqlType.equalsIgnoreCase("timestamp")||sqlType.equalsIgnoreCase("time")){    
-            return PropertyType.Date;    
-        }    
+        }   
             
-        return null;    
+        return PropertyType.String;   
     } 
 
     /**
