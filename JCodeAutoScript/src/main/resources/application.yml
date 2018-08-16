@@ -1,0 +1,12 @@
+security:
+  user:
+    name: root
+    password: root
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    password: chinasoft
+    url: jdbc:mysql://localhost/chinasoft?useUnicode=true&characterEncoding=UTF-8
+    username: chinasoft
+  session:
+    store-type: none

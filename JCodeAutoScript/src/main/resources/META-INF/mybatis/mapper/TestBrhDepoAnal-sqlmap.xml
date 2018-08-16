@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.good.testjcode.mapper.TestBrhDepoAnalDao">
+	<resultMap id="BaseResultMap" type="com.good.testjcode.bean.TestBrhDepoAnalPo">
+	 	<result column="PK_ID" jdbcType="VARCHAR" property="pkId"/>
+	 	<result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+	 	<result column="DATA_DATE" jdbcType="DATE" property="dataDate"/>
+	 	<result column="DEPOS_AMT" jdbcType="DECIMAL" property="deposAmt"/>
+	 	<result column="DEPOS_DAY" jdbcType="DECIMAL" property="deposDay"/>
+	 	<result column="DEPOS_MONTH" jdbcType="DECIMAL" property="deposMonth"/>
+	 	<result column="DEPOS_YEAR" jdbcType="DECIMAL" property="deposYear"/>
+	 	<result column="testdate" jdbcType="TIMESTAMP" property="testdate"/>
+	</resultMap>
+	<!--通用查询列-->
+	<sql id = "baseSelectColunm">
+		<trim prefix="" suffixOverrides=",">
+			t.PK_ID AS pkId,
+			t.ORG_CODE AS orgCode,
+			t.DATA_DATE AS dataDate,
+			t.DEPOS_AMT AS deposAmt,
+			t.DEPOS_DAY AS deposDay,
+			t.DEPOS_MONTH AS deposMonth,
+			t.DEPOS_YEAR AS deposYear,
+			t.testdate AS testdate,
+		</trim>
+	</sql>
+			
+	<select id="selectByConditionSelective" resultType="com.good.testjcode.bean.TestBrhDepoAnalPo">
+		SELECT 
+		 	<include refid="baseSelectColunm"/>
+		FROM test_branch_depos_anal t
+		<where> 1=1 
+				<if test="condition.pkId != null and condition.pkId != ''"> and t.PK_ID = #{condition.pkId} </if> 
+				<if test="condition.orgCode != null and condition.orgCode != ''"> and t.ORG_CODE = #{condition.orgCode} </if> 
+				<if test="condition.dataDate != null and condition.dataDate != ''"> and t.DATA_DATE = #{condition.dataDate} </if> 
+				<if test="condition.deposAmt != null and condition.deposAmt != ''"> and t.DEPOS_AMT = #{condition.deposAmt} </if> 
+				<if test="condition.deposDay != null and condition.deposDay != ''"> and t.DEPOS_DAY = #{condition.deposDay} </if> 
+				<if test="condition.deposMonth != null and condition.deposMonth != ''"> and t.DEPOS_MONTH = #{condition.deposMonth} </if> 
+				<if test="condition.deposYear != null and condition.deposYear != ''"> and t.DEPOS_YEAR = #{condition.deposYear} </if> 
+				<if test="condition.testdate != null and condition.testdate != ''"> and t.testdate = #{condition.testdate} </if> 
+		</where>
+	</select>
+	<!--根据主键查询-->
+	<select id="selectByPrimaryKey" resultType="com.good.testjcode.bean.TestBrhDepoAnalPo">
+		SELECT 
+		 	<include refid="baseSelectColunm"/>
+		FROM test_branch_depos_anal t
+		WHERE	1=1
+				and t.PK_ID = #{pkId}
+	</select>
+	<!--根据主键更新表字段-->
+	<update id="updateByPrimaryKey" parameterType="com.good.testjcode.bean.TestBrhDepoAnalPo">
+		UPDATE test_branch_depos_anal  
+		<set>
+				PK_ID = #{pkId,jdbcType=VARCHAR},
+				ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+				DATA_DATE = #{dataDate,jdbcType=DATE},
+				DEPOS_AMT = #{deposAmt,jdbcType=DECIMAL},
+				DEPOS_DAY = #{deposDay,jdbcType=DECIMAL},
+				DEPOS_MONTH = #{deposMonth,jdbcType=DECIMAL},
+				DEPOS_YEAR = #{deposYear,jdbcType=DECIMAL},
+				testdate = #{testdate,jdbcType=TIMESTAMP},
+		</set>
+		WHERE 1= 1
+				and PK_ID = #{pkId}
+	</update>
+
+	<!--根据主键更新有值存在的字段-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.good.testjcode.bean.TestBrhDepoAnalPo">
+		UPDATE test_branch_depos_anal  
+		<set>
+				<if test="pkId != null and pkId != ''"> PK_ID = #{pkId,jdbcType=VARCHAR},</if>
+				<if test="orgCode != null and orgCode != ''"> ORG_CODE = #{orgCode,jdbcType=VARCHAR},</if>
+				<if test="dataDate != null and dataDate != ''"> DATA_DATE = #{dataDate,jdbcType=DATE},</if>
+				<if test="deposAmt != null and deposAmt != ''"> DEPOS_AMT = #{deposAmt,jdbcType=DECIMAL},</if>
+				<if test="deposDay != null and deposDay != ''"> DEPOS_DAY = #{deposDay,jdbcType=DECIMAL},</if>
+				<if test="deposMonth != null and deposMonth != ''"> DEPOS_MONTH = #{deposMonth,jdbcType=DECIMAL},</if>
+				<if test="deposYear != null and deposYear != ''"> DEPOS_YEAR = #{deposYear,jdbcType=DECIMAL},</if>
+				<if test="testdate != null and testdate != ''"> testdate = #{testdate,jdbcType=TIMESTAMP},</if>
+
+		</set>
+		WHERE 1= 1
+				and PK_ID = #{pkId}
+	</update>
+	
+	<!--插入有选择的值-->
+	<insert id="insertSelective" parameterType="com.good.testjcode.bean.TestBrhDepoAnalPo">
+		INSERT INTO test_branch_depos_anal  
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				 
+					<if test="pkId != null and pkId != ''">
+				 		PK_ID,
+				 	</if>
+					<if test="orgCode != null and orgCode != ''">
+				 		ORG_CODE,
+				 	</if>
+					<if test="dataDate != null and dataDate != ''">
+				 		DATA_DATE,
+				 	</if>
+					<if test="deposAmt != null and deposAmt != ''">
+				 		DEPOS_AMT,
+				 	</if>
+					<if test="deposDay != null and deposDay != ''">
+				 		DEPOS_DAY,
+				 	</if>
+					<if test="deposMonth != null and deposMonth != ''">
+				 		DEPOS_MONTH,
+				 	</if>
+					<if test="deposYear != null and deposYear != ''">
+				 		DEPOS_YEAR,
+				 	</if>
+					<if test="testdate != null and testdate != ''">
+				 		testdate,
+				 	</if>
+			</trim>
+		VALUES  
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				 
+					<if test="pkId != null and pkId != ''">
+				 		#{pkId,jdbcType=VARCHAR},
+				 	</if>
+					<if test="orgCode != null and orgCode != ''">
+				 		#{orgCode,jdbcType=VARCHAR},
+				 	</if>
+					<if test="dataDate != null and dataDate != ''">
+				 		#{dataDate,jdbcType=DATE},
+				 	</if>
+					<if test="deposAmt != null and deposAmt != ''">
+				 		#{deposAmt,jdbcType=DECIMAL},
+				 	</if>
+					<if test="deposDay != null and deposDay != ''">
+				 		#{deposDay,jdbcType=DECIMAL},
+				 	</if>
+					<if test="deposMonth != null and deposMonth != ''">
+				 		#{deposMonth,jdbcType=DECIMAL},
+				 	</if>
+					<if test="deposYear != null and deposYear != ''">
+				 		#{deposYear,jdbcType=DECIMAL},
+				 	</if>
+					<if test="testdate != null and testdate != ''">
+				 		#{testdate,jdbcType=TIMESTAMP},
+				 	</if>
+			</trim>
+	</insert>
+	<!--插入整条记录-->
+	<insert id="insert" parameterType="com.good.testjcode.bean.TestBrhDepoAnalPo">
+		INSERT INTO test_branch_depos_anal  
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				 
+					<if test="pkId != null and pkId != ''">
+				 		PK_ID,
+				 	</if>
+					<if test="orgCode != null and orgCode != ''">
+				 		ORG_CODE,
+				 	</if>
+					<if test="dataDate != null and dataDate != ''">
+				 		DATA_DATE,
+				 	</if>
+					<if test="deposAmt != null and deposAmt != ''">
+				 		DEPOS_AMT,
+				 	</if>
+					<if test="deposDay != null and deposDay != ''">
+				 		DEPOS_DAY,
+				 	</if>
+					<if test="deposMonth != null and deposMonth != ''">
+				 		DEPOS_MONTH,
+				 	</if>
+					<if test="deposYear != null and deposYear != ''">
+				 		DEPOS_YEAR,
+				 	</if>
+					<if test="testdate != null and testdate != ''">
+				 		testdate,
+				 	</if>
+			</trim>
+		VALUES  
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				 
+					<if test="pkId != null and pkId != ''">
+				 		#{pkId,jdbcType=VARCHAR},
+				 	</if>
+					<if test="orgCode != null and orgCode != ''">
+				 		#{orgCode,jdbcType=VARCHAR},
+				 	</if>
+					<if test="dataDate != null and dataDate != ''">
+				 		#{dataDate,jdbcType=DATE},
+				 	</if>
+					<if test="deposAmt != null and deposAmt != ''">
+				 		#{deposAmt,jdbcType=DECIMAL},
+				 	</if>
+					<if test="deposDay != null and deposDay != ''">
+				 		#{deposDay,jdbcType=DECIMAL},
+				 	</if>
+					<if test="deposMonth != null and deposMonth != ''">
+				 		#{deposMonth,jdbcType=DECIMAL},
+				 	</if>
+					<if test="deposYear != null and deposYear != ''">
+				 		#{deposYear,jdbcType=DECIMAL},
+				 	</if>
+					<if test="testdate != null and testdate != ''">
+				 		#{testdate,jdbcType=TIMESTAMP},
+				 	</if>
+			</trim>
+	</insert>
+	<!--根据主键删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		DELETE FROM test_branch_depos_anal 
+		WHERE 1= 1
+				and PK_ID = #{pkId}
+	</delete>
+</mapper>
